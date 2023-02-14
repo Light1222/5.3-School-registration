@@ -12,9 +12,7 @@ module.exports.viewProfile= async function(req, res){
     res.render('course/profile', {course})
 }
 //render add form
-
-//add
-module.exports.renderEditForm = function(req, res){
+module.exports.renderAddForm = function(req, res){
     const course = {
         name: '',
         department: '',
@@ -22,6 +20,16 @@ module.exports.renderEditForm = function(req, res){
         description: ''
     }
     res.render('course/add', {course, departments});
+}
+//add
+module.exports.addCourse = async function(req, res){
+    const course = await Course.create({
+        name: req.body.name,
+        department: req.body.department,
+        instructor_name: req.body.instructor_name,
+        description: req.body.description
+    });
+    res.redirect(`/courses/profile/${course.id}`);
 }
 //render edit form
 module.exports.renderEditForm = async function(req, res){
@@ -40,6 +48,14 @@ module.exports.updateCourse = async function(req, res){
         id: req.params.id
     }
     });
-    res.redirect(`/course/profile/${req.params.id}`);
+    res.redirect(`/courses/profile/${req.params.id}`);
 }
 //delete
+module.exports.deleteCourse = async function(req, res){
+    await Course.destroy({
+        where: {
+            id:req.params.id
+        }
+    });
+    res.redirect('/courses')
+}
