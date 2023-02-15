@@ -1,0 +1,7 @@
+mixin studentForm(student, saveUrl, cancelUrl)
+
+    div.form-container
+        form(action=saveUrl method='post')
+            div.form-input
+                label(for='first_name') First Name
+                input
