@@ -1,6 +1,5 @@
 extends ../layout
 
 block content
-    h3= course.name
     include ../mixins/studentForm
-    +studentForm(student, `/students/edit${student.id}`,`/students/profile/${student.id}`)
+    +studentForm(student, `/students/edit/${student.id}`,`/students/profile/${student.id}`)
