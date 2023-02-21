@@ -7,3 +7,21 @@ block content
     div
         h3 Name: #{student.first_name} #{student.last_name}
         p Grade Level: #{student.grade_level}
+
+    h4 Students courses
+        table
+            thead
+                tr
+                    th Course Title
+                    th Instructor
+                    th Department
+                    th
+            tbody
+                each course in student.courses
+                    tr
+                        td= course.name
+                        td= course.instructor_name
+                        td= course.department
+                        td
+                            a(href=`/courses/profile/${course.id}`) View Course
+
